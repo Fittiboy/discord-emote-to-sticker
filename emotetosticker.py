@@ -75,7 +75,13 @@ def resize_apng(emote_url):
     return get_apng_url(response)
 
 
-def main():
+def main(emote_url):
+    apng = convert_to_apng(emote_url)
+    apng = resize_apng(apng)
+    return apng
+
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="Emote To Sticker")
     parser.add_argument("emote_url",
                         help="The URL you get when you right-click "
@@ -84,10 +90,4 @@ def main():
                         metavar="Emote URL",
                         type=str)
     args = parser.parse_args()
-    apng = convert_to_apng(args.emote_url)
-    apng = resize_apng(apng)
-    return apng
-
-
-if __name__ == "__main__":
-    print(main())
+    print(main(args.emote_url))
